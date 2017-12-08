@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import { ToastAndroid, Image, StyleSheet, Dimensions, TouchableHighlight } from 'react-native'
+import { ToastAndroid, Image, StyleSheet, Dimensions, TouchableHighlight, View } from 'react-native'
 import { Title, Body, Text, Container, Header, Footer, Icon, Grid, Col, Row, Thumbnail, Content, List, ListItem, Spinner, Card, CardItem, Button, StyleProvider } from 'native-base';
 import _ from 'lodash'
 import getTheme from '.././native-base-theme/components';
 import material from '.././native-base-theme/variables/material';
-import {
-    AdMobBanner,
-    AdMobInterstitial,
-    PublisherBanner,
-    AdMobRewarded,
-} from 'react-native-admob'
+
 var styles = StyleSheet.create({
     genre: {
         alignSelf: 'center', height: 100, width: 100, borderRadius: 4, borderWidth: 1.5, borderColor: 'gray'
@@ -87,7 +82,7 @@ export default class GenresScreen extends Component {
                         </Body>
                     </Header>
                 </StyleProvider>
-                <Content >
+                <Content style={{ flex: 1 }}>
                     {this.state.isLoading ? <Spinner /> :
                         <List>
                             <Grid>
@@ -214,11 +209,6 @@ export default class GenresScreen extends Component {
                                 </Row>
                             </Grid>
                         </List>}
-                    <AdMobBanner
-                        adSize="fullBanner"
-                        adUnitID="ca-app-pub-3282954780570062/3817788955"
-                        onAdFailedToLoad={error => console.error(error)}
-                    />
                 </Content>
             </Container>
         );

@@ -4,13 +4,16 @@ import AnimeInfo from '../screens/AnimeInfo';
 import FavoritesTab from '../screens/FavoritesTab';
 import HistoryTab from '../screens/HistoryTab';
 import { Button, Icon, Footer, FooterTab, Text, StyleProvider } from 'native-base';
+import { View } from 'react-native'
 import React from "react";
 import AnimeEpisodes from '../screens/AnimeEpisodes'
 import Player from '../screens/Player';
 import GenresScreen from '../screens/GenresScreen';
 import getTheme from '.././native-base-theme/components';
 import material from '.././native-base-theme/variables/material';
-
+import {
+    AdMobBanner
+} from 'react-native-admob'
 export const FeedStack = StackNavigator({
     Genres: {
         screen: GenresScreen,
@@ -82,36 +85,45 @@ export const Tabs = TabNavigator({
         tabBarComponent: props => {
 
             return (
-                <StyleProvider style={getTheme(material)}>
-                    <Footer >
-                        <FooterTab
-                            tabActiveBgColor="#4fb5f9"
-                            tabBarActiveTextColor="#2d83bc"
-                            tabBarTextColor="#6b6b6b">
-                            <Button
-                                vertical
-                                active={props.navigationState.index === 0}
-                                onPress={() => props.navigation.navigate("Genres")}>
-                                <Icon name="search" />
-                                <Text>Browse</Text>
-                            </Button>
-                            <Button
-                                vertical
-                                active={props.navigationState.index === 1}
-                                onPress={() => props.navigation.navigate("Favorites")}>
-                                <Icon name="star" />
-                                <Text>Favorites</Text>
-                            </Button>
-                            <Button
-                                vertical
-                                active={props.navigationState.index === 2}
-                                onPress={() => props.navigation.navigate("History")}>
-                                <Icon name="calendar" />
-                                <Text>History</Text>
-                            </Button>
-                        </FooterTab>
-                    </Footer>
-                </StyleProvider>
+                <View>
+                    <AdMobBanner
+                        adSize="fullBanner"
+                        adUnitID="ca-app-pub-3282954780570062/4037280808"
+                        testDevices={[AdMobBanner.simulatorId]}
+                        onAdFailedToLoad={error => console.error(error)}
+                    />
+                    <StyleProvider style={getTheme(material)}>
+                        <Footer >
+                            <FooterTab
+                                tabActiveBgColor="#4fb5f9"
+                                tabBarActiveTextColor="#2d83bc"
+                                tabBarTextColor="#6b6b6b">
+                                <Button
+                                    vertical
+                                    active={props.navigationState.index === 0}
+                                    onPress={() => props.navigation.navigate("Genres")}>
+                                    <Icon name="search" />
+                                    <Text>Browse</Text>
+                                </Button>
+                                <Button
+                                    vertical
+                                    active={props.navigationState.index === 1}
+                                    onPress={() => props.navigation.navigate("Favorites")}>
+                                    <Icon name="star" />
+                                    <Text>Favorites</Text>
+                                </Button>
+                                <Button
+                                    vertical
+                                    active={props.navigationState.index === 2}
+                                    onPress={() => props.navigation.navigate("History")}>
+                                    <Icon name="calendar" />
+                                    <Text>History</Text>
+                                </Button>
+                            </FooterTab>
+                        </Footer>
+                    </StyleProvider>
+                </View>
+
             );
         }
 
