@@ -43,11 +43,7 @@ export default class GenresScreen extends Component {
         var tempList = [];
         this.setState({ listItems: [] });
         if (text == "all") {
-            this.setState({
-                listItems: this.state.originaItems
-            })
-
-            navigate('Feed', { listItems: this.state.listItems })
+            navigate('Feed', { listItems: this.state.originaItems })
         } else {
             await this.state.originaItems.forEach((anime => {
                 var animeGenre = anime.Genres.toLowerCase();
