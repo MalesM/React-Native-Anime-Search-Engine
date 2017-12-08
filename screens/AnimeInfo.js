@@ -86,12 +86,19 @@ export default class AnimeInfo extends Component {
 
                             </Body>
                             <Right>
+                                {this.state.isLoading ?
+                                    <Button transparent disabled
+                                        onPress={() => this.goToEpisodes()}>
+                                        <Icon name='ios-play' style={{ fontSize: 30, color: 'orange' }} />
+                                        <Text>Watch</Text>
+                                    </Button> :
+                                    <Button transparent
+                                        onPress={() => this.goToEpisodes()}>
+                                        <Icon name='ios-play' style={{ fontSize: 30, color: 'orange' }} />
+                                        <Text>Watch</Text>
+                                    </Button>
+                                }
 
-                                <Button transparent
-                                    onPress={() => this.goToEpisodes()}>
-                                    <Icon name='ios-play' style={{ fontSize: 30, color: 'orange' }} />
-                                    <Text>Watch</Text>
-                                </Button>
                             </Right>
                         </CardItem>
                     </Card>
