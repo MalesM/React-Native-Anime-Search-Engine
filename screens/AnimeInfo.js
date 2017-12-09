@@ -122,8 +122,8 @@ export default class AnimeInfo extends Component {
     }
     goToEpisodes() {
         const { navigate } = this.props.navigation;
-        //AsyncStorage.removeItem('userID');
-        navigate('Episodes', { animeLink: this.state.animeLink, animeTitle: this.state.animeTitle, userID: this.idUser, episodeSource: this.state.episodeSource });
+        
+        navigate('Episodes', { animeLink: this.state.animeLink, animeTitle: this.state.animeTitle, userID: this.idUser/* , episodeSource: this.state.episodeSource */ });
     }
 
     addToFavorite() {
@@ -140,7 +140,6 @@ export default class AnimeInfo extends Component {
                         this.itemsRef.child('Users').child(value).child('Favorites').child(this.favoriteKey).remove();
                     }
                 });
-
 
             }).done();
     }

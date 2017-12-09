@@ -48,7 +48,7 @@ export default class HistoryTab extends Component {
                                 <ListItem
                                     button={true}
                                     onPress={() => {
-                                        /* this.added = false; */
+                                        
                                         navigate('Episodes', { animeLink: item.link, animeTitle: item.name, userID: this.idUser });
                                     }}
                                 >
@@ -82,4 +82,6 @@ export default class HistoryTab extends Component {
 
             }).done();
     }
+
+    
 }
