@@ -9,22 +9,8 @@ import { Tabs } from './appsettings/router';
 import { Spinner } from 'native-base';
 import firebase from './appsettings/fbconfig';
 
-function cacheImages(images) {
-  return images.map(image => {
-    if (typeof image === 'string') {
-      return Image.prefetch(image);
-    } else {
-      return Asset.fromModule(image).downloadAsync();
-    }
-  });
-};
-
-
 export default class App extends Component {
 
-  state = {
-    isReady: true,
-  };
 
 
   constructor(props) {
