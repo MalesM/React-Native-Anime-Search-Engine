@@ -22,17 +22,13 @@ function cacheImages(images) {
 
 export default class App extends Component {
 
-  state = {
-    isReady: true,
-  };
-
-
   constructor(props) {
     super(props);
-    this.loadUser = false;
+    
     this.itemsRef = firebase.database().ref();
     this.state = {
-      isReady: false
+      isReady: false,
+      loadUser: false,
     }
     console.ignoredYellowBox = [
       'Setting a timer',
@@ -44,12 +40,18 @@ export default class App extends Component {
 
 
   render() {
-    if (!this.loadUser) { this.getCurrentUser(); this.loadUser = true; }
+    if (!this.state.loadUser) { 
+      this.getCurrentUser(); 
+      
+      return(
+        <Spinner />
+      );
+    }else return <Tabs />;
 
     // if (!this.state.isReady) {
     //   return <Spinner />
     // }
-    return <Tabs />;
+    
   }
 
 
@@ -60,7 +62,7 @@ export default class App extends Component {
         if (value !== null) {
           console.log(value);
           ToastAndroid.showWithGravity("Welcome Back!", ToastAndroid.SHORT, ToastAndroid.CENTER);
-          this.setState({ idd: value });
+          this.setState({ idd: value, loadUser: true });
 
         } else {
           ToastAndroid.showWithGravity("Welcome for the first time!", ToastAndroid.SHORT, ToastAndroid.CENTER);
@@ -72,7 +74,7 @@ export default class App extends Component {
   }
 
   setUser() {
-    AsyncStorage.setItem('userID', this.itemsRef.child('Users').push().key)
+    AsyncStorage.setItem('userID', this.itemsRef.child('Users').push().key).then( () => {this.setState({loadUser: true})}).done();
   }
 }
 
