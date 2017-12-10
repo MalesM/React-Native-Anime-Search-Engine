@@ -113,7 +113,7 @@ export default class AnimeEpisodes extends Component {
         var formData = new FormData();
         for (var k in params)
             formData.append(k, params[k]);
-        fetch('http://animeonline.club/php/animewatch_new.php', {
+        fetch('http://animeonline.club/php/animewatch_new1.php', {
             method: 'POST',
             body: formData
         })
