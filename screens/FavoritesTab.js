@@ -24,10 +24,16 @@ export default class FavoritesTab extends Component {
         this.addFavorites();
     } */
 
+    componentWillMount() {
+
+    }
+
 
     render() {
         const { navigate } = this.props.navigation;
         this.addFavorites();
+
+
         /* if(!this.added){
             this.addFavorites();
         } */
@@ -64,6 +70,7 @@ export default class FavoritesTab extends Component {
         );
     }
 
+
     addFavorites() {
         AsyncStorage.getItem('userID')
             .then((id) => {
@@ -78,6 +85,8 @@ export default class FavoritesTab extends Component {
                     });
                     this.added = true;
                     this.setState({ listData: data, isLoading: false })
+                }, (error) => {
+                    console.log(error);
                 });
 
             }).done();

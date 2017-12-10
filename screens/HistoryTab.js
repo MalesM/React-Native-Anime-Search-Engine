@@ -28,9 +28,7 @@ export default class HistoryTab extends Component {
     render() {
         const { navigate } = this.props.navigation;
         this.addHistory();
-        /* if(!this.added){ 
-            this.addFavorites();
-        } */
+
         return (
 
             <Container>
