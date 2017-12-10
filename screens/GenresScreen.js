@@ -7,7 +7,7 @@ import material from '.././native-base-theme/variables/material';
 
 var styles = StyleSheet.create({
     genre: {
-        alignSelf: 'center', height: 100, width: 100, borderRadius: 4, borderWidth: 1.5, borderColor: 'gray'
+        alignSelf: 'center', flex: 1, height: 100, width: 100, borderRadius: 4, borderWidth: 1.5, borderColor: 'gray', resizeMode: 'stretch'
     }
 })
 
@@ -69,7 +69,6 @@ export default class GenresScreen extends Component {
         const imageWidth = dimensions.width;
 
         return (
-
             <Container>
                 <StyleProvider style={getTheme(material)}>
                     <Header backgroundColor='#FB8C00'>
@@ -82,7 +81,7 @@ export default class GenresScreen extends Component {
                     {this.state.isLoading ? <Spinner /> :
                         <List>
                             <Grid>
-                                <Row >
+                                <Row style={{marginTop: 10}}>
                                     <TouchableHighlight
                                         onPress={() => this.filter('all')}>
                                         <Image

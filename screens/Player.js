@@ -84,7 +84,7 @@ export default class Player extends Component {
         var formData = new FormData();
         for (var k in params)
             formData.append(k, params[k]);
-        await fetch('http://animeonline.club/php/animewatch_new.php', {
+        await fetch('http://animeonline.club/php/animewatch_new1.php', {
             method: 'POST',
             body: formData
         })

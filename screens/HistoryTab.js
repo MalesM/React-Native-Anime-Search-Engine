@@ -39,14 +39,15 @@ export default class HistoryTab extends Component {
                         </Body>
                     </Header>
                 </StyleProvider>
-                <Content>
+                <Content >
                     {this.state.isLoading ? <Spinner /> :
-                        <List dataArray={this.state.listData}
+                        <List style={{marginTop: 5}} dataArray={this.state.listData}
                             renderRow={(item) =>
                                 <ListItem
+                                    style={{marginLeft: 0}}
                                     button={true}
                                     onPress={() => {
-                                        /* this.added = false; */
+                                        
                                         navigate('Episodes', { animeLink: item.link, animeTitle: item.name, userID: this.idUser });
                                     }}
                                 >
@@ -80,4 +81,6 @@ export default class HistoryTab extends Component {
 
             }).done();
     }
+
+    
 }
