@@ -69,7 +69,6 @@ export default class GenresScreen extends Component {
         const imageWidth = dimensions.width;
 
         return (
-
             <Container>
                 <StyleProvider style={getTheme(material)}>
                     <Header backgroundColor='#FB8C00'>
@@ -87,7 +86,7 @@ export default class GenresScreen extends Component {
                                         onPress={() => this.filter('all')}>
                                         <Image
                                             resizeMode={'cover'}
-                                            style={{ width: imageWidth, height: 150, borderRadius: 4, borderWidth: 1.5, borderColor: 'gray' }}
+                                            style={{width: imageWidth, height: 150, borderRadius: 4, borderWidth: 1.5, borderColor: 'gray' }}
                                             source={require('../assets/thumbs/thumb_all_anime.jpeg')}
                                         />
                                     </TouchableHighlight>

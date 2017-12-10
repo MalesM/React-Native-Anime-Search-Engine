@@ -53,7 +53,7 @@ export default class AnimeEpisodes extends Component {
                 </StyleProvider>
                 <Content>
                     {this.state.isLoading ? <Spinner /> :
-                        <List dataArray={this.state.episodeSource}
+                        <List style={{marginTop: 5}} dataArray={this.state.episodeSource}
                             renderRow={(item) =>
                                 <ListItem
                                     style={{ width: '100%', marginLeft: 0, paddingLeft: 0, paddingRight: 0, marginRight: 0 }}
