@@ -16,6 +16,11 @@ export default class GenresScreen extends Component {
 
     constructor(props) {
         super(props);
+        console.log(props.navigation.state.key);
+       /*  keyy = props.navigation.state.key
+        props.navigation.setParams({
+            firstKey: keyy
+        }); */
         this.state = {
             isLoading: true
 

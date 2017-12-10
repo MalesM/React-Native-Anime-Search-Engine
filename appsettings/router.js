@@ -1,4 +1,4 @@
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator, NavigationActions } from 'react-navigation';
 import AnimeList from '../screens/AnimeList';
 import AnimeInfo from '../screens/AnimeInfo';
 import FavoritesTab from '../screens/FavoritesTab';
@@ -101,7 +101,27 @@ export const Tabs = TabNavigator({
                                 <Button
                                     vertical
                                     active={props.navigationState.index === 0}
-                                    onPress={() => props.navigation.navigate("Genres")}>
+                                    onPress={() => {
+
+                                        const resetAction = NavigationActions.reset({
+                                            index: 0,
+                                            actions: [
+                                                NavigationActions.navigate({routeName: 'Genres'})
+                                            ]
+                                        });
+                                        props.navigation.dispatch(resetAction);
+
+
+                                        //const backAction = NavigationActions.back({
+                                            /* props.navigation.state.params.firstKey */
+                                        //});
+                                        
+                                        //props.navigation.dispatch(backAction);
+                                    }
+
+                                        /* props.navigation.navigate("Genres") */
+
+                                    }>
                                     <Icon name="search" />
                                     <Text>Browse</Text>
                                 </Button>
