@@ -1,8 +1,3 @@
 <resources>
-    <string moduleConfig="true" name="appcenterCrashes_whenToSendCrashes">ALWAYS_SEND</string>
-    <string moduleConfig="true" name="appcenterAnalytics_whenToEnableAnalytics">ALWAYS_SEND</string>
-
-
-
-    <string name="app_name">AnimeProjectReact</string>
+    <string name="app_name">AnimeTitan</string>
 </resources>

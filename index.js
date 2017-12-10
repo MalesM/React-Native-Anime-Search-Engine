@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
 import App from './App';
 
-AppRegistry.registerComponent('AnimeProjectReact', () => App);
+AppRegistry.registerComponent('AnimeTitan', () => App);
