@@ -90,7 +90,7 @@ export const Tabs = TabNavigator({
                         adSize="fullBanner"
                         adUnitID="ca-app-pub-3282954780570062/4037280808"
                         testDevices={[AdMobBanner.simulatorId]}
-                        onAdFailedToLoad={error => console.error(error)}
+                        onAdFailedToLoad={error => console.log(error)}
                     />
                     <StyleProvider style={getTheme(material)}>
                         <Footer >
