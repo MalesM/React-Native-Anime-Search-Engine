@@ -111,15 +111,7 @@ export const Tabs = TabNavigator({
                                         });
                                         props.navigation.dispatch(resetAction);
 
-
-                                        //const backAction = NavigationActions.back({
-                                            /* props.navigation.state.params.firstKey */
-                                        //});
-                                        
-                                        //props.navigation.dispatch(backAction);
                                     }
-
-                                        /* props.navigation.navigate("Genres") */
 
                                     }>
                                     <Icon name="search" />
