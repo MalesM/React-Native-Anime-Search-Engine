@@ -29,7 +29,7 @@ export default class AnimeList extends Component {
 
     this._layoutProvider = new LayoutProvider(() => { return "DEFAULT" }, (type, dim) => {
       dim.width = width;
-      dim.height = 60;
+      dim.height = 65;
     });
 
 
@@ -41,7 +41,7 @@ export default class AnimeList extends Component {
     const item = data;
     return (
       <Container>
-        <Content style={{ paddingLeft: 5, paddingRight: 5, paddingTop: 5 }}>
+        <Content style={{ paddingLeft: 5, paddingRight: 5, paddingTop: 2.5 }}>
           <Grid
             onPress={() => navigate('Info', { title: item.Title, image: item.Thumb, animeLink: item.Link })}
             style={{

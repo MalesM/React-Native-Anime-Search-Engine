@@ -1,4 +1,4 @@
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator, NavigationActions } from 'react-navigation';
 import AnimeList from '../screens/AnimeList';
 import AnimeInfo from '../screens/AnimeInfo';
 import FavoritesTab from '../screens/FavoritesTab';
@@ -90,7 +90,7 @@ export const Tabs = TabNavigator({
                         adSize="fullBanner"
                         adUnitID="ca-app-pub-3282954780570062/4037280808"
                         testDevices={[AdMobBanner.simulatorId]}
-                        onAdFailedToLoad={error => console.error(error)}
+                        onAdFailedToLoad={error => console.log(error)}
                     />
                     <StyleProvider style={getTheme(material)}>
                         <Footer >
@@ -101,7 +101,17 @@ export const Tabs = TabNavigator({
                                 <Button
                                     vertical
                                     active={props.navigationState.index === 0}
-                                    onPress={() => props.navigation.navigate("Genres")}>
+                                    onPress={() => {
+
+                                        const resetAction = NavigationActions.reset({
+                                            index: 0,
+                                            actions: [
+                                                NavigationActions.navigate({ routeName: 'Genres' })
+                                            ]
+                                        });
+                                        props.navigation.dispatch(resetAction);
+
+                                    }}>
                                     <Icon name="search" />
                                     <Text>Browse</Text>
                                 </Button>

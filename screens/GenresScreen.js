@@ -5,36 +5,42 @@ import _ from 'lodash'
 import getTheme from '.././native-base-theme/components';
 import material from '.././native-base-theme/variables/material';
 
+
 var styles = StyleSheet.create({
     genre: {
-        alignSelf: 'center', height: 100, width: 100, borderRadius: 4, borderWidth: 1.5, borderColor: 'gray'
+        alignSelf: 'center', flex: 1, height: 100, width: 100, borderRadius: 4, borderWidth: 1.5, borderColor: 'gray', resizeMode: 'stretch'
     }
 })
 
 
+
+
 export default class GenresScreen extends Component {
+
+
+
 
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true
+            isLoading: false
 
         }
+
+        console.log(this.props.screenProps)
+        const { navigation, screenProps } = this.props
+
+        this.state = {
+            originaItems: screenProps.originalItems
+        };
+
+
+
     }
 
-    componentDidMount() {
 
-        return fetch('http://gomcineplex.com/data/anime/sd_android.json')
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    isLoading: false,
-                    originaItems: responseJson
-                });
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+
+    componentWillMount() {
 
     }
 
@@ -69,7 +75,6 @@ export default class GenresScreen extends Component {
         const imageWidth = dimensions.width;
 
         return (
-
             <Container>
                 <StyleProvider style={getTheme(material)}>
                     <Header backgroundColor='#FB8C00'>
@@ -82,11 +87,10 @@ export default class GenresScreen extends Component {
                     {this.state.isLoading ? <Spinner /> :
                         <List>
                             <Grid>
-                                <Row >
+                                <Row style={{ marginTop: 10 }}>
                                     <TouchableHighlight
                                         onPress={() => this.filter('all')}>
                                         <Image
-                                            resizeMode={'cover'}
                                             style={{ width: imageWidth, height: 150, borderRadius: 4, borderWidth: 1.5, borderColor: 'gray' }}
                                             source={require('../assets/thumbs/thumb_all_anime.jpeg')}
                                         />

@@ -1,17 +1,13 @@
 {
-  "name": "AnimeProjectReact",
-  "version": "0.0.1",
+  "name": "AnimeTitan",
+  "version": "2.0.1",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "flow": "flow"
   },
   "dependencies": {
-    "@expo/videoplayer": "^0.1.13",
-    "appcenter": "^1.0.1",
-    "appcenter-analytics": "^1.0.1",
-    "appcenter-crashes": "^1.0.1",
-    "expo": "^22.0.0",
     "firebase": "^4.7.0",
     "lodash": "^4.17.4",
     "native-base": "^2.3.3",
@@ -33,5 +29,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
   }
 }

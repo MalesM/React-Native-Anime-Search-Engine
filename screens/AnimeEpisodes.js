@@ -16,12 +16,18 @@ export default class AnimeEpisodes extends Component {
             isLoading: false,
             animeTitle: params.animeTitle,
             userID: params.userID,
-            episodeSource: params.episodeSource
+            episodeSource: [],
         }
         console.log(params.animeLink);
     }
 
-    componentDidMount() {
+    /* componentDidMount() {
+        this.getFromHistory();
+        
+    } */
+
+    componentWillMount() {
+        this.getEpisodeList();
     }
 
     render() {
@@ -47,7 +53,7 @@ export default class AnimeEpisodes extends Component {
                 </StyleProvider>
                 <Content>
                     {this.state.isLoading ? <Spinner /> :
-                        <List dataArray={this.state.episodeSource}
+                        <List style={{marginTop: 5}} dataArray={this.state.episodeSource}
                             renderRow={(item) =>
                                 <ListItem
                                     style={{ width: '100%', marginLeft: 0, paddingLeft: 0, paddingRight: 0, marginRight: 0 }}
@@ -97,5 +103,30 @@ export default class AnimeEpisodes extends Component {
 
             }
         });
+    }
+
+    getEpisodeList() {
+        var params = {
+            Episodes: this.state.animeLink
+        }
+
+        var formData = new FormData();
+        for (var k in params)
+            formData.append(k, params[k]);
+        fetch('http://animeonline.club/php/animewatch_new1.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson.released[0].content);
+                this.setState({
+                    episodeSource: responseJson.episodes,
+                    animeStatus: _.trim(responseJson.status[0].content),
+                    animeReleased: _.trim(responseJson.released[0].content),
+                    animeDesc: responseJson.desc[0].content,
+                    isLoading: false
+                })
+            })
     }
 }
