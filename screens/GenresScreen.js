@@ -5,6 +5,7 @@ import _ from 'lodash'
 import getTheme from '.././native-base-theme/components';
 import material from '.././native-base-theme/variables/material';
 
+
 var styles = StyleSheet.create({
     genre: {
         alignSelf: 'center', flex: 1, height: 100, width: 100, borderRadius: 4, borderWidth: 1.5, borderColor: 'gray', resizeMode: 'stretch'
