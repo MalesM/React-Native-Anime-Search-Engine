@@ -1,4 +1,4 @@
-package com.animetitan;
+package com.radoman.animetitan;
 
 import android.app.Application;
 

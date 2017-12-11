@@ -104,11 +104,12 @@ android {
                 keyAlias MYAPP_RELEASE_KEY_ALIAS
                 keyPassword MYAPP_RELEASE_KEY_PASSWORD
             }
+            
         }
     }
 
     defaultConfig {
-        applicationId "com.animetitan"
+        applicationId "com.radoman.animetitan"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -130,6 +131,7 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
+            manifestPlaceholders = [excludeSystemAlertWindowPermission: "true"]
         }
     }
     // applicationVariants are e.g. debug, release
