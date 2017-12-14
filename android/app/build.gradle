@@ -111,9 +111,9 @@ android {
     defaultConfig {
         applicationId "com.radoman.animetitan"
         minSdkVersion 16
-        targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 23
+        versionCode 11
+        versionName "2.0.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -150,6 +150,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-native-video-player')
     compile project(':react-native-video')
     compile project(':react-native-vector-icons')
     compile project(':react-native-orientation')
