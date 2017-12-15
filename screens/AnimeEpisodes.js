@@ -53,7 +53,7 @@ export default class AnimeEpisodes extends Component {
                 </StyleProvider>
                 <Content>
                     {this.state.isLoading ? <Spinner /> :
-                        <List style={{marginTop: 5}} dataArray={this.state.episodeSource}
+                        <List style={{ marginTop: 5 }} dataArray={this.state.episodeSource}
                             renderRow={(item) =>
                                 <ListItem
                                     style={{ width: '100%', marginLeft: 0, paddingLeft: 0, paddingRight: 0, marginRight: 0 }}
@@ -65,6 +65,15 @@ export default class AnimeEpisodes extends Component {
                                     }
                                 >
 
+                                    <Body style={{ flex: 1 }}><Text style={{ alignSelf: 'center', textAlign: 'center' }}>  {item.title}</Text></Body>
+                                    <Right>
+                                        <Button bordered primary style={{ alignSelf: 'center', marginLeft: 15 }}
+                                            onPress={() => {
+                                                this.downloadEpisode(item.href)
+                                            }}>
+                                            <Icon name='download' />
+                                        </Button>
+                                    </Right>
                                     <Text style={{ textAlign: 'center', flex: 1 }}>  {item.title}</Text>
                                 </ListItem>
                             }>
