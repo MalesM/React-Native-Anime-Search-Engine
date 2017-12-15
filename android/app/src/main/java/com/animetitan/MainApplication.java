@@ -32,7 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new OrientationPackage(),
             new RNAdMobPackage(),
-             new VideoPlayerPackage()
+             new VideoPlayerPackage(),
+             new RNFetchBlobPackage()
       );
     }
 

@@ -1,4 +1,6 @@
 rootProject.name = 'AnimeTitan'
+include ':react-native-android-wv-video'
+project(':react-native-android-wv-video').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-android-wv-video/android/app')
 include ':react-native-native-video-player'
 project(':react-native-native-video-player').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-native-video-player/android')
 include ':react-native-photo-view'
