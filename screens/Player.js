@@ -3,7 +3,7 @@ import { WebView, View, StyleSheet, StatusBar } from 'react-native';
 import { Title, Text, Container, Header, Footer, Icon, Grid, Col, Row, Thumbnail, Content, Spinner, Left, Button, Body, Right } from 'native-base';
 import Video from 'react-native-video';
 import Orientation from 'react-native-orientation';
-import AndroidWebView from 'react-native-android-wv-video'
+
 var VideoPlayer = require('react-native-native-video-player');
 
 
@@ -23,6 +23,7 @@ var style = StyleSheet.create({
 })
 
 export default class Player extends Component {
+
 
     static navigationOptions = {
         gesturesEnabled: false

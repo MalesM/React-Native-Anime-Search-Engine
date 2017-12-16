@@ -4,6 +4,8 @@ import { List, ListItem, Title, Body, Text, Container, Header, Footer, Icon, Gri
 import getTheme from '.././native-base-theme/components';
 import material from '.././native-base-theme/variables/material';
 import firebase from '../appsettings/fbconfig';
+import RNFetchBlob from 'react-native-fetch-blob'
+import _ from 'lodash'
 
 export default class AnimeEpisodes extends Component {
 
@@ -19,6 +21,7 @@ export default class AnimeEpisodes extends Component {
             episodeSource: [],
         }
         console.log(params.animeLink);
+
     }
 
     /* componentDidMount() {
@@ -53,7 +56,7 @@ export default class AnimeEpisodes extends Component {
                 </StyleProvider>
                 <Content>
                     {this.state.isLoading ? <Spinner /> :
-                        <List style={{marginTop: 5}} dataArray={this.state.episodeSource}
+                        <List style={{ marginTop: 5 }} dataArray={this.state.episodeSource}
                             renderRow={(item) =>
                                 <ListItem
                                     style={{ width: '100%', marginLeft: 0, paddingLeft: 0, paddingRight: 0, marginRight: 0 }}
@@ -65,7 +68,16 @@ export default class AnimeEpisodes extends Component {
                                     }
                                 >
 
-                                    <Text style={{ textAlign: 'center', flex: 1 }}>  {item.title}</Text>
+                                    <Body style={{ flex: 1 }}><Text style={{ alignSelf: 'center', textAlign: 'center' }}>  {item.title}</Text></Body>
+                                    <Right>
+                                        <Button bordered primary style={{ alignSelf: 'center', marginLeft: 15 }}
+                                            onPress={() => {
+                                                this.downloadEpisode(item.href, item.title)
+                                            }}>
+                                            {this.isDownloaded(item.title) ? <Icon name='checkmark' /> : <Icon name='checkmark' />}
+                                        </Button>
+                                    </Right>
+
                                 </ListItem>
                             }>
 
@@ -129,4 +141,83 @@ export default class AnimeEpisodes extends Component {
                 })
             })
     }
+
+    downloadEpisode(url, name) {
+
+        name = _.escape(name)
+
+        var params = {
+            LinkIos: url
+        }
+
+        var formData = new FormData();
+        for (var k in params)
+            formData.append(k, params[k]);
+        fetch('http://animeonline.club/php/animewatch_new1.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                // console.log(responseJson)
+                this.setState({
+                    gstream: responseJson.gstream,
+                    isLoading: false
+                })
+                // VideoPlayer.showVideoPlayer(this.state.gstream);
+                // console.log(this.state.gstream);
+
+                let dirs = RNFetchBlob.fs.dirs
+                let animeDownloadDir = dirs.SDCardDir + '/AnimeTitanDownloads';
+
+                RNFetchBlob.fs.isDir(animeDownloadDir)
+                    .then((isDir) => {
+                        console.log(isDir + ' ' + animeDownloadDir)
+                        if (!isDir) {
+                            RNFetchBlob.fs.mkdir(animeDownloadDir)
+                                .then(console.log('created'))
+                                .catch(error => console.log(error))
+                        }
+                    })
+                console.log(this.state.gstream)
+
+                RNFetchBlob
+                    .config({
+                        // response data will be saved to this path if it has access right.
+                        path: animeDownloadDir + '/' + name + '.mp4'
+                    })
+                    .fetch('GET', this.state.gstream, {
+                        //some headers ..
+                    })
+                    .progress((received, total) => {
+                        console.log('progress', received / total)
+                    })
+                    .then((res) => {
+                        // the path should be dirs.DocumentDir + 'path-to-file.anything'
+                        console.log('The file saved to ', res.path())
+                    })
+            })
+    }
+
+    async isDownloaded(name) {
+        let dirs = RNFetchBlob.fs.dirs;
+        // let animeDownloadDir = dirs.SDCardDir + '/AnimeTitanDownloads' + _.escape(name+'.mp4');
+        let animeDownloadDir = dirs.SDCardDir + '/AnimeTitanDownloads';
+        var result = false
+        await RNFetchBlob.fs.ls(animeDownloadDir)
+            .then((files) => {
+                if (_.indexOf(files, _.escape(name + '.mp4')) > -1)
+                    return true;
+                console.log(_.indexOf(files, _.escape(name + '.mp4')))
+            })
+
+        return result;
+    }
+
+
+
+
+
 }
+
+

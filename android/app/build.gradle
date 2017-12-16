@@ -150,6 +150,9 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fs')
+    compile project(':react-native-fetch-blob')
+
     compile project(':react-native-native-video-player')
     compile project(':react-native-video')
     compile project(':react-native-vector-icons')
