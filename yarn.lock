@@ -3593,6 +3593,10 @@ react-native-admob@^2.0.0-beta.3:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-android-wv-video@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-android-wv-video/-/react-native-android-wv-video-1.1.1.tgz#c9e7c22046f9d2fcba48c70ea58bdb2d033fd8f1"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
@@ -3629,6 +3633,10 @@ react-native-easy-grid@0.1.15:
     create-react-class "^15.6.0"
     prop-types "^15.5.10"
     react-timer-mixin "^0.13.3"
+
+react-native-native-video-player@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/react-native-native-video-player/-/react-native-native-video-player-1.3.4.tgz#ac58c9d4ee66c2dc1f4fc884b9f3acf5448040e4"
 
 react-native-orientation@^3.1.0:
   version "3.1.0"

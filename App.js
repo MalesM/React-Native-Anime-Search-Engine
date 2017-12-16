@@ -4,20 +4,20 @@
  * @flow
  */
 import React, { Component } from 'react';
-import { ToastAndroid, AsyncStorage, Image } from 'react-native'
+import { ToastAndroid, AsyncStorage, Image, Dimensions } from 'react-native'
 import { Tabs } from './appsettings/router';
-import { Spinner } from 'native-base';
+import { Spinner, Container, Content, Grid, Row, Text } from 'native-base';
 import firebase from './appsettings/fbconfig';
 
 export default class App extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.itemsRef = firebase.database().ref();
     this.state = {
       isReady: false,
-      loadUser: false,
+      loadUser: false
     }
     console.ignoredYellowBox = [
       'Setting a timer',
@@ -25,26 +25,61 @@ export default class App extends Component {
     ];
   }
 
+  componentWillMount() {
+
+    this.getCurrentUser();
+  }
+
 
 
 
   render() {
-    if (!this.state.loadUser) { 
-      this.getCurrentUser(); 
-      
-      return(
-        <Spinner />
+    if (!this.state.loadUser || !this.state.isReady) {
+
+
+      return (
+        <Container>
+          <Content style={{ backgroundColor: '#FB8C00' }} contentContainerStyle={{ flex: 1, justifyContent: 'center' }}>
+            <Grid style={{ alignItems: 'center' }}>
+              <Row size={1}>
+                <Image source={require('./assets/animetitancover.png')}
+                  style={{
+                    width: Dimensions.get('window').width,
+                    height: 170
+                  }}></Image>
+              </Row>
+              <Grid style={{ alignItems: 'center' }}>
+                <Row>
+                  <Spinner style={{ margin: 'auto', alignSelf: 'center' }} color='blue' />
+                </Row>
+                <Row>
+
+                  <Text style={{ color: "white", margin: 10, fontFamily: 'robot_c', alignSelf: 'center', fontWeight: 'bold', fontSize: 18 }}>THE TITANS ARE LOADING YOUR APP.</Text>
+                </Row>
+              </Grid>
+              <Row size={1}>
+
+              </Row>
+
+            </Grid>
+          </Content>
+        </Container >
+
+
       );
-    }else return <Tabs />;
+    }
+    else return <Tabs
+      screenProps={{ originalItems: this.state.originaItems }}
+    />;
 
     // if (!this.state.isReady) {
     //   return <Spinner />
     // }
-    
+
   }
 
 
-  getCurrentUser() {
+  async getCurrentUser() {
 
     AsyncStorage.getItem('userID')
       .then((value) => {
@@ -60,10 +95,24 @@ export default class App extends Component {
         }
       }).done();
 
+    await fetch('http://gomcineplex.com/data/anime/sd_android.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isReady: true,
+          originaItems: responseJson
+        });
+        // console.log(this.state.originaItems)
+      })
+
+      .catch((error) => {
+        console.error(error);
+      });
+
   }
 
   setUser() {
-    AsyncStorage.setItem('userID', this.itemsRef.child('Users').push().key).then( () => {this.setState({loadUser: true})}).done();
+    AsyncStorage.setItem('userID', this.itemsRef.child('Users').push().key).then(() => { this.setState({ loadUser: true }) }).done();
   }
 }
 

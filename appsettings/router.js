@@ -90,7 +90,7 @@ export const Tabs = TabNavigator({
                         adSize="fullBanner"
                         adUnitID="ca-app-pub-3282954780570062/4037280808"
                         testDevices={[AdMobBanner.simulatorId]}
-                        onAdFailedToLoad={error => console.error(error)}
+                        onAdFailedToLoad={error => console.log(error)}
                     />
                     <StyleProvider style={getTheme(material)}>
                         <Footer >
@@ -106,14 +106,22 @@ export const Tabs = TabNavigator({
                                         const resetAction = NavigationActions.reset({
                                             index: 0,
                                             actions: [
+<<<<<<< HEAD
                                                 NavigationActions.navigate({routeName: 'Genres'})
+=======
+                                                NavigationActions.navigate({ routeName: 'Genres' })
+>>>>>>> origin/radoman
                                             ]
                                         });
                                         props.navigation.dispatch(resetAction);
 
+<<<<<<< HEAD
                                     }
 
                                     }>
+=======
+                                    }}>
+>>>>>>> origin/radoman
                                     <Icon name="search" />
                                     <Text>Browse</Text>
                                 </Button>

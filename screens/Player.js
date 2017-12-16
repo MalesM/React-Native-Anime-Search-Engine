@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, StatusBar } from 'react-native';
+import { WebView, View, StyleSheet, StatusBar } from 'react-native';
 import { Title, Text, Container, Header, Footer, Icon, Grid, Col, Row, Thumbnail, Content, Spinner, Left, Button, Body, Right } from 'native-base';
 import Video from 'react-native-video';
 import Orientation from 'react-native-orientation';
+import AndroidWebView from 'react-native-android-wv-video'
+var VideoPlayer = require('react-native-native-video-player');
 
-import VideoPlayer from 'react-native-video-controls';
+
+// import VideoPlayer from 'react-native-video-controls';
 import {
     AdMobBanner,
     AdMobInterstitial,
@@ -12,7 +15,12 @@ import {
     AdMobRewarded,
 } from 'react-native-admob'
 
-
+var style = StyleSheet.create({
+    fullscreen: {
+        height: 500,
+        width: 500
+    }
+})
 
 export default class Player extends Component {
 
@@ -63,14 +71,21 @@ export default class Player extends Component {
         return (
             <Container>
                 <StatusBar hidden />
-                {this.state.isLoading ? <Spinner /> : <VideoPlayer
-                    source={{ uri: this.state.gstream }}
-                    paused={false}
-                    onBack={() => {
-                        this.props.navigation.goBack()
-                    }}
+                {this.state.isLoading ? <Spinner /> :
+                    // <VideoPlayer
+                    //     source={{ uri: this.state.gstream }}
+                    //     paused={false}
+                    //     onBack={() => {
+                    //         this.props.navigation.goBack()
+                    //     }}
+                    //     onError={(error)=>{
+                    //         console.log(error);
+                    //     }}
+                    //     onLoadStart={(data)=>{
+                    //         console.log(data);
+                    //     }}
 
-                />}
+                    <Text>Test</Text>}
             </Container>
 
         )
@@ -90,12 +105,13 @@ export default class Player extends Component {
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson)
+                // console.log(responseJson)
                 this.setState({
                     gstream: responseJson.gstream,
                     isLoading: false
                 })
-                console.log(this.state.gstream);
+                VideoPlayer.showVideoPlayer(this.state.gstream);
+                // console.log(this.state.gstream);
             })
     }
 
