@@ -27,7 +27,7 @@ export default class GenresScreen extends Component {
 
         }
 
-        console.log(this.props.screenProps)
+
         const { navigation, screenProps } = this.props
 
         this.state = {

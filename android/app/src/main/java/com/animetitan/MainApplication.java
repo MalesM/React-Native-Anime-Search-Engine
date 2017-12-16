@@ -11,6 +11,9 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.wog.videoplayer.VideoPlayerPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.rnfs.RNFSPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +33,10 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactVideoPackage(),
             new VectorIconsPackage(),
             new OrientationPackage(),
-            new RNAdMobPackage()
+            new RNAdMobPackage(),
+             new VideoPlayerPackage(),
+             new RNFetchBlobPackage(),
+             new RNFSPackage()
       );
     }
 

@@ -8,6 +8,7 @@ import { ToastAndroid, AsyncStorage, Image, Dimensions } from 'react-native'
 import { Tabs } from './appsettings/router';
 import { Spinner, Container, Content, Grid, Row, Text } from 'native-base';
 import firebase from './appsettings/fbconfig';
+import RNFetchBlob from 'react-native-fetch-blob';
 
 export default class App extends Component {
 
@@ -23,6 +24,13 @@ export default class App extends Component {
       'Setting a timer',
       'Circular indeterminate'
     ];
+
+    let dirs = RNFetchBlob.fs.dirs
+
+
+
+
+
   }
 
   componentWillMount() {
