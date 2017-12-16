@@ -106,22 +106,12 @@ export const Tabs = TabNavigator({
                                         const resetAction = NavigationActions.reset({
                                             index: 0,
                                             actions: [
-<<<<<<< HEAD
-                                                NavigationActions.navigate({routeName: 'Genres'})
-=======
                                                 NavigationActions.navigate({ routeName: 'Genres' })
->>>>>>> origin/radoman
                                             ]
                                         });
                                         props.navigation.dispatch(resetAction);
 
-<<<<<<< HEAD
-                                    }
-
-                                    }>
-=======
                                     }}>
->>>>>>> origin/radoman
                                     <Icon name="search" />
                                     <Text>Browse</Text>
                                 </Button>
