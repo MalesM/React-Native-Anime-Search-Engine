@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { WebView, View, StyleSheet, StatusBar } from 'react-native';
+import { WebView, View, StyleSheet, StatusBar, AppState } from 'react-native';
 import { Title, Text, Container, Header, Footer, Icon, Grid, Col, Row, Thumbnail, Content, Spinner, Left, Button, Body, Right } from 'native-base';
 import Video from 'react-native-video';
 import Orientation from 'react-native-orientation';
@@ -39,19 +39,23 @@ export default class Player extends Component {
         const { params } = this.props.navigation.state;
         this.state = {
             episodeLink: params.episodeLink,
-            isLoading: true
+            isLoading: true,
+            pause: 0,
+            appState: AppState.currentState
         }
-
 
     }
 
 
 
     componentDidMount() {
+        AppState.addEventListener('change', this._handleAppStateChange);
+        //reactContext.addLifecycleEventListener(this);
         Orientation.lockToLandscape();
     }
 
     componentWillMount() {
+        
         this.getStreams();
     }
 
@@ -63,12 +67,16 @@ export default class Player extends Component {
 
         Orientation.unlockAllOrientations();
 
+        AppState.removeEventListener('change', this._handleAppStateChange);
+
     }
 
 
 
 
     render() {
+        this.checkPause();
+
         return (
             <Container>
                 <StatusBar hidden />
@@ -109,12 +117,30 @@ export default class Player extends Component {
                 // console.log(responseJson)
                 this.setState({
                     gstream: responseJson.gstream,
-                    isLoading: false
+                    isLoading: false, 
+                    //pause: 1,
                 })
+                
                 VideoPlayer.showVideoPlayer(this.state.gstream);
+
+                this.pause = 1;
                 // console.log(this.state.gstream);
             })
     }
 
+    checkPause(){
+        console.log(AppState.currentState);
+        console.log(this.state.pause);
+        if (AppState.currentState === 'active' && this.state.pause == 1) {this.props.navigation.goBack();}
+    }
+
+    _handleAppStateChange = (nextAppState) => {
+        if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+          console.log('App has come to the foreground!')
+        }
+        this.setState({appState: nextAppState, pause: 1});
+      }
+
+    
 
 }
