@@ -40,8 +40,8 @@ export default class Player extends Component {
         this.state = {
             episodeLink: params.episodeLink,
             isLoading: true,
-            pause: 0,
-            appState: AppState.currentState
+            appState: AppState.currentState,
+            
         }
 
     }
@@ -50,7 +50,7 @@ export default class Player extends Component {
 
     componentDidMount() {
         AppState.addEventListener('change', this._handleAppStateChange);
-        //reactContext.addLifecycleEventListener(this);
+       
         Orientation.lockToLandscape();
     }
 
@@ -60,6 +60,8 @@ export default class Player extends Component {
     }
 
     componentWillUnmount() {
+        AppState.removeEventListener('change', this._handleAppStateChange);
+
         AdMobInterstitial.setAdUnitID('ca-app-pub-3282954780570062/4893576213');
 
         AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
@@ -67,7 +69,7 @@ export default class Player extends Component {
 
         Orientation.unlockAllOrientations();
 
-        AppState.removeEventListener('change', this._handleAppStateChange);
+        
 
     }
 
@@ -75,7 +77,7 @@ export default class Player extends Component {
 
 
     render() {
-        this.checkPause();
+        
 
         return (
             <Container>
@@ -94,7 +96,7 @@ export default class Player extends Component {
                     //         console.log(data);
                     //     }}
 
-                    <Text>Test</Text>}
+                    <Text></Text>}
             </Container>
 
         )
@@ -123,22 +125,24 @@ export default class Player extends Component {
                 
                 VideoPlayer.showVideoPlayer(this.state.gstream);
 
-                this.pause = 1;
+                //this.pause = 1;
                 // console.log(this.state.gstream);
             })
     }
 
-    checkPause(){
+    /* checkPause(){
         console.log(AppState.currentState);
         console.log(this.state.pause);
-        if (AppState.currentState === 'active' && this.state.pause == 1) {this.props.navigation.goBack();}
-    }
+        if (AppState.currentState == 'active' && this.state.pause == 1) {this.props.navigation.goBack();}
+    } */
 
     _handleAppStateChange = (nextAppState) => {
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
-          console.log('App has come to the foreground!')
+          console.log('App has come to the foreground!');
+          this.props.navigation.goBack();
+          
         }
-        this.setState({appState: nextAppState, pause: 1});
+        this.setState({appState: nextAppState});
       }
 
     
